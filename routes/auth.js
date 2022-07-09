@@ -63,8 +63,8 @@ router.post('/sign-in', async (req, res) =>{
 /* Get current user */
 router.get('/me', verifyToken, async (req, res)=>{
   try{
-    const token = await jwt.verify(req.token, process.env.SECRETKEY);
-    return res.status(200).send(sanitizeUser(token.user));
+    const user = req.user;
+    return user ?  res.status(200).send(sanitizeUser(user)) : res.status(403).send(`Error: Invalid token`);
   }
   catch(e){
     return res.status(500).send(`Error verifying user`);
