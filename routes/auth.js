@@ -28,7 +28,7 @@ router.post('/sign-up', async (req, res) => {
       password: await bcrypt.hash(data.password, 10)
     }
     users.push(newUser);
-    return res.status(200).send(`New user: ${users.find(user => user.id === newUser.id).userName} created!`);
+    return res.status(201).send(`New user: ${users.find(user => user.id === newUser.id).userName} created!`);
   }
   catch(e){
     return res.status(500).send(`Error creating user`);
